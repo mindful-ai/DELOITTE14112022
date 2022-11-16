@@ -33,3 +33,35 @@ Type "help", "copyright", "credits" or "license" for more information.
 {'HPE001': {'name': 'Vijay', 'age': '14', 'regid': 'HPE001', 'phy': '99', 'chem': '98', 'math': '97', 'bio': '36', 'avg': '0', 'rank': 
 '0'}}
 >>>
+
+-------------------------------------------------
+
+# [LAB] Write code to calculate the average for all the students
+
+
+for student in classdict.values():
+    totalmarks = 0
+    for key, value in student.items():
+        if key in ['phy', 'chem', 'math', 'bio']:
+            totalmarks += float(value)
+    student['avg'] = totalmarks/4
+ 
+
+print(classdict)
+print('-'*60 + ' > Third Step')
+
+# [LAB] Write code to calculate the rank for all the students
+
+
+avgs = list(set([student['avg'] for student in classdict.values()]))
+avgs.sort(reverse=True)
+rank = 1
+for avg in avgs:
+    for student in classdict.values():
+        if(student['avg'] == avg):
+            student['rank'] = rank
+    rank += 1
+
+
+print(classdict)
+print('-'*60 + ' > Fourth Step')   
