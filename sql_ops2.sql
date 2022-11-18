@@ -223,3 +223,101 @@ INSERT INTO dependents(dependent_id,first_name,last_name,relationship,employee_i
 
 
 select * from employees;
+
+
+--------------------------------------------------------------------
+
+select table_name from user_tables;
+
+
+-- inner join 
+
+select 
+    employees.first_name,
+    employees.last_name,
+    employees.department_id,
+    departments.department_id,
+    departments.department_name
+from 
+    employees inner join departments on departments.department_id = employees.department_id
+where
+    employees.department_id IN (1, 2, 3);
+
+-- left join
+
+
+select 
+    c.country_name,
+    c.country_id,
+    l.country_id,
+    l.street_address,
+    l.city
+from 
+    countries c left join locations l on l.country_id = c.country_id
+where
+    c.country_id in ('IN', 'US', 'UK'); 
+
+
+-- right join
+
+
+select 
+    c.country_name,
+    c.country_id,
+    l.country_id,
+    l.street_address,
+    l.city
+from 
+    countries c right join locations l on l.country_id = c.country_id
+where
+    c.country_id in ('IN', 'US', 'UK');
+
+-- outer join
+
+select 
+    employees.first_name,
+    employees.last_name,
+    employees.department_id,
+    departments.department_id,
+    departments.department_name
+from 
+    employees left outer join departments on departments.department_id = employees.department_id
+    
+
+select 
+    employees.first_name,
+    employees.last_name,
+    employees.department_id,
+    departments.department_id,
+    departments.department_name
+from 
+    employees right outer join departments on departments.department_id = employees.department_id
+where 
+    department_name = 'Purchasing' or department_name = 'Administration'
+order by
+    first_name
+
+-- grouping
+
+
+select
+    employees.department_id,
+    departments.department_name,
+    count(employees.employee_id) headcount
+from 
+    employees inner join departments on departments.department_id = employees.department_id
+group by
+    departments.department_id
+order by
+    departments.department_id;
+
+
+--------------------------------------------------------------------
+
+-- Number of employees in different departments and their average salary
+
+
+-- Dependents of all employees who are programmers
+
+
+-- Number of stock managers in location 1700 and their names
